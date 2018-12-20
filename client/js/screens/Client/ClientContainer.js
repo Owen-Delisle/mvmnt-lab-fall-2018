@@ -2,7 +2,13 @@ import React, { Component } from "react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import Client from "./Client";
-import { View, ActivityIndicator, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  ActivityIndicator,
+  Text,
+  TouchableOpacity,
+  Image
+} from "react-native";
 import { formatSessionData } from "../../lib/helper";
 import CoachContext from "../../context/CoachContext/CoachProvider";
 
@@ -22,6 +28,7 @@ const Clients = gql`
 class ClientContainer extends Component {
   static navigationOptions = {
     title: "CLIENTS",
+    headerTintColor: "white",
     headerTitleStyle: {
       color: "white",
       fontSize: 24
@@ -40,6 +47,9 @@ class ClientContainer extends Component {
           );
         }}
       </CoachContext.Consumer>
+    ),
+    headerBackground: (
+      <Image source={require("../../assets/images/headerSmall.png")} />
     )
   };
   render() {

@@ -24,7 +24,15 @@ const SignupMutation = gql`
 
 class SignUpContainer extends Component {
   static navigationOptions = {
-    header: null
+    headerTitleStyle: {
+      color: "white",
+      fontSize: 14
+    },
+    headerTintColor: "white",
+    headerStyle: {
+      backgroundColor: "transparent",
+      borderBottomColor: "transparent"
+    }
   };
   render() {
     return (

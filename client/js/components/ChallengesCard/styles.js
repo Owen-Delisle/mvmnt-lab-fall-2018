@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
-import { globalStyles } from "../../config/styles";
+import { globalStyles, colors } from "../../config/styles";
 var width = Dimensions.get("window").width;
 var height = Dimensions.get("window").height;
 
@@ -14,8 +14,9 @@ const styles = StyleSheet.create({
     marginTop: 90,
     alignItems: "center",
     justifyContent: "space-between",
-    borderColor: "black",
-    borderWidth: 1
+    borderColor: colors.grey,
+    borderWidth: 1,
+    borderRadius: 10
   },
   cardHeading: {
     alignItems: "center"

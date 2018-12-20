@@ -23,7 +23,7 @@ const DailyReportQuery = gql`
 class DailyReportsContainer extends Component {
   static navigationOptions = {
     title: "DAILY REPORTS",
-    headerTintColor: 'white',
+    headerTintColor: "white",
     headerTitleStyle: {
       color: "white",
       fontSize: 24
@@ -37,13 +37,12 @@ class DailyReportsContainer extends Component {
     return (
       <UserContext.Consumer>
         {({ id }) => (
-          <Query query={DailyReportQuery}
-            variables={{ userId: "cjpa5q4ip0ccn0130y1xdj32i" }}>
+          <Query query={DailyReportQuery} variables={{ userId: id }}>
             {({ loading, error, data }) => {
               if (loading)
                 return (
                   <View style={styles.container}>
-                    <ActivityIndicator/>
+                    <ActivityIndicator />
                   </View>
                 );
               if (error) return `${error}`;
@@ -54,7 +53,7 @@ class DailyReportsContainer extends Component {
           </Query>
         )}
       </UserContext.Consumer>
-    )
+    );
   }
 }
 

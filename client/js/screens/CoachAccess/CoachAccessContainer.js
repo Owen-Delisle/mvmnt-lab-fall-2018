@@ -15,7 +15,15 @@ const LoginMutation = gql`
 
 class CoachAccessContainer extends Component {
   static navigationOptions = {
-    header: null
+    headerTitleStyle: {
+      color: "white",
+      fontSize: 14
+    },
+    headerTintColor: "white",
+    headerStyle: {
+      backgroundColor: "transparent",
+      borderBottomColor: "transparent"
+    }
   };
   render() {
     return (

@@ -17,7 +17,11 @@ const LoginMutation = gql`
 
 class SignInContainer extends Component {
   static navigationOptions = {
-    header: null
+    header: null,
+    headerStyle: {
+      backgroundColor: "transparent",
+      borderBottomColor: "transparent"
+    }
   };
   render() {
     return (
@@ -26,7 +30,7 @@ class SignInContainer extends Component {
           <UserContext.Consumer>
             {({ storeSessionToken, token }) => {
               if (token) {
-                this.props.navigation.navigate("App");
+                this.props.navigation.navigate("Main");
               } else {
                 return (
                   <CoachContext.Consumer>

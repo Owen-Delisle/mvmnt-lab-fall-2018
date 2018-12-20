@@ -83,15 +83,15 @@ export const AppStack = createBottomTabNavigator(
         let style = { marginBottom: 25 };
         let showStyle = true;
 
-        if (routeName === "Main") {
-          focused
-            ? (image = require("../assets/images/workout-active.png"))
-            : (image = require("../assets/images/workout-inactive.png"));
-        } else if (routeName === "Profile") {
+        if (routeName === "Profile") {
           showStyle = false;
           focused
             ? (image = require("../assets/images/profile-active.png"))
             : (image = require("../assets/images/profile-inactive.png"));
+        } else if (routeName === "Main") {
+          focused
+            ? (image = require("../assets/images/workout-active.png"))
+            : (image = require("../assets/images/workout-inactive.png"));
         } else if (routeName === "Poses") {
           showStyle = false;
           focused

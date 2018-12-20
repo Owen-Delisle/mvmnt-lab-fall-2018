@@ -10,6 +10,7 @@ import {
   TextInput
 } from "react-native";
 import styles from "./styles";
+import moment from "moment";
 
 class PainModal extends Component {
   constructor(props) {
@@ -32,6 +33,13 @@ class PainModal extends Component {
         pain: parseFloat(pain)
       };
     });
+  }
+
+  getDaysBetween(dateA, dateB) {
+    let startDate = moment(dateA);
+    let endDate = moment(dateB);
+    let days = endDate.diff(startDate, "days");
+    return days;
   }
 
   render() {
@@ -125,7 +133,9 @@ class PainModal extends Component {
                     notes: this.state.notes
                   }
                 });
-
+                console.log(
+                  this.props.allChallengeResponse.allChallenges.length
+                );
                 this.props.allChallengeResponse.allChallenges.map(challenge => {
                   if (
                     challenge.startDate <= new Date().toISOString() &&

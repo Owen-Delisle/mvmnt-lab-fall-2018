@@ -1,11 +1,18 @@
 import { Text, View, Image, TouchableOpacity } from "react-native";
 import styles from "./styles";
-import React from "react";
+import React, { Fragment } from "react";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import PropTypes from "prop-types";
 import LinearGradient from "react-native-linear-gradient";
 
-const Profile = ({ navigation, dataProfile, logout, id, allChallenges, coachId }) => {
+const Profile = ({
+  navigation,
+  dataProfile,
+  logout,
+  id,
+  allChallenges,
+  coachId
+}) => {
   return (
     <View style={styles.profileWrapper}>
       <View style={styles.profileHeader}>
@@ -67,35 +74,37 @@ const Profile = ({ navigation, dataProfile, logout, id, allChallenges, coachId }
         <Text style={styles.profileOptionsText}>Completed Challenges</Text>
         <FontAwesome5 name={"chevron-right"} size={20} solid />
       </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.reminders}
-        onPress={() => {
-          navigation.navigate("Reminders");
-        }}
-      >
-        <Text style={styles.profileOptionsText}>Reminders</Text>
-        <FontAwesome5 name={"chevron-right"} size={20} solid />
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.about}
-        onPress={() => {
-          navigation.navigate("About");
-        }}
-      >
-        <Text style={styles.profileOptionsText}>About</Text>
-        <FontAwesome5 name={"chevron-right"} size={20} solid />
-      </TouchableOpacity>
       {coachId === undefined && (
-        <TouchableOpacity
-          style={styles.profileButton}
-          onPress={() => {
-            logout(id);
-          }}
-        >
-          <Text style={styles.buttonText}>LOGOUT</Text>
-        </TouchableOpacity>
+        <Fragment>
+          <TouchableOpacity
+            style={styles.reminders}
+            onPress={() => {
+              navigation.navigate("Reminders");
+            }}
+          >
+            <Text style={styles.profileOptionsText}>Reminders</Text>
+            <FontAwesome5 name={"chevron-right"} size={20} solid />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.about}
+            onPress={() => {
+              navigation.navigate("About");
+            }}
+          >
+            <Text style={styles.profileOptionsText}>About</Text>
+            <FontAwesome5 name={"chevron-right"} size={20} solid />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.profileButton}
+            onPress={() => {
+              logout(id);
+            }}
+          >
+            <Text style={styles.buttonText}>LOGOUT</Text>
+          </TouchableOpacity>
+        </Fragment>
       )}
     </View>
   );

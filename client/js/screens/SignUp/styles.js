@@ -34,7 +34,9 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     width: width,
-    height: height
+    height: height,
+    position: "absolute",
+    top: -65
   }
 });
 

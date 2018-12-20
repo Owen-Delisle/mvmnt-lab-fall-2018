@@ -20,6 +20,7 @@ const AllChallengesQuery = gql`
 class CompletedChallengesContainer extends Component {
   static navigationOptions = {
     title: "COMPLETED CHALLENGES",
+    headerTintColor: "white",
     headerTitleStyle: {
       color: "white",
       fontSize: 14
@@ -48,7 +49,7 @@ class CompletedChallengesContainer extends Component {
             );
           } else {
             return (
-              <Query query={AllChallengesQuery} variables={{ id }}>
+              <Query query={AllChallengesQuery} variables={{ userId: id }}>
                 {({ loading, error, data }) => {
                   if (loading) return <Text>Loading</Text>;
                   if (error) return <Text>{error}</Text>;

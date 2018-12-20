@@ -5,7 +5,9 @@ const styles = StyleSheet.create({
   container: globalStyles.container,
   background: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height
+    height: Dimensions.get("window").height,
+    position: "absolute",
+    top: -64
   },
   header: {
     color: "white",
@@ -47,7 +49,7 @@ const styles = StyleSheet.create({
   button: {
     width: 280,
     height: 50,
-    backgroundColor: "#1BC695",
+    backgroundColor: "transparent",
     borderRadius: 30
   },
   buttonText: {

@@ -13,10 +13,11 @@ const styles = StyleSheet.create({
     padding: 0,
     margin: 0,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginTop: 20
   },
   name: {
-    fontSize: 25,
+    fontSize: 18,
     fontWeight: "bold",
     justifyContent: "center",
     alignContent: "center",

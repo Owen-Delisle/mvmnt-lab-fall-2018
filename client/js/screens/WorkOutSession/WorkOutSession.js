@@ -13,6 +13,7 @@ import styles from "./styles";
 import Session from "../../components/Session";
 // import Video from "react-native-video";
 // import Vid from "../../assets/videos/video.mp4";
+import DailyReportModal from "../../components/DailyReportModal";
 
 class WorkoutSession extends Component {
   constructor() {
@@ -102,9 +103,10 @@ class WorkoutSession extends Component {
         </ScrollView>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => alert("this will go to the modal")}
+          // onPress={() => alert("this will go to the modal")}
         >
-          <Text style={styles.buttonText}>END SESSION</Text>
+          {/* <Text style={styles.buttonText}>END SESSION</Text> */}
+          <DailyReportModal />
         </TouchableOpacity>
       </React.Fragment>
     );

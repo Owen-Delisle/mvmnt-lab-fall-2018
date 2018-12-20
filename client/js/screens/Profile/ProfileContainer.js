@@ -17,8 +17,10 @@ class ProfileContainer extends Component {
   constructor(props) {
     super(props);
   }
+
   static navigationOptions = ({ navigation }) => ({
     title: "PROFILE",
+    headerTintColor: "white",
     headerTitleStyle: {
       color: "white",
       fontSize: 24
@@ -83,7 +85,9 @@ class ProfileContainer extends Component {
                                 logout={removeUserIdToken}
                                 id={userId}
                                 coachId={id}
-                                allChallenges={this.props.allChallenges.allChallenges}
+                                allChallenges={
+                                  this.props.allChallenges.allChallenges
+                                }
                               />
                             );
                           }

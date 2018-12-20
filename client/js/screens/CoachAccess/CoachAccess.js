@@ -9,6 +9,7 @@ import {
   StatusBar
 } from "react-native";
 import styles from "./styles";
+import LinearGradient from "react-native-linear-gradient";
 
 const required = value => (value ? undefined : "* Required Field");
 
@@ -64,14 +65,20 @@ const CoachAccess = ({ login, storeSessionToken }) => {
                       />
                     )}
                   </Field>
-                  <TouchableOpacity
+                  <LinearGradient
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    colors={["#1DC6C2", "#17C687"]}
                     style={styles.button}
-                    onPress={() => {
-                      handleSubmit(values);
-                    }}
                   >
-                    <Text style={styles.buttonText}>LOG IN</Text>
-                  </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        handleSubmit(values);
+                      }}
+                    >
+                      <Text style={styles.buttonText}>LOG IN</Text>
+                    </TouchableOpacity>
+                  </LinearGradient>
                 </View>
               )}
             </Form>
