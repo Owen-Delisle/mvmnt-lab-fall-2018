@@ -11,8 +11,8 @@ import {
 } from "react-native";
 import styles from "./styles";
 import Session from "../../components/Session";
-// import Video from "react-native-video";
-// import Vid from "../../assets/videos/video.mp4";
+import DailyReportModal from "../../components/DailyReportModal";
+import YouTube from "react-native-youtube";
 
 class WorkoutSession extends Component {
   constructor() {
@@ -57,6 +57,7 @@ class WorkoutSession extends Component {
     return (
       <React.Fragment>
         {/* <Video
+          volume={1.0}
           source={Vid}
           resizeMode="contain"
           style={{
@@ -87,14 +88,17 @@ class WorkoutSession extends Component {
             />
           </TouchableOpacity>
         </Video> */}
-        <View style={styles.videoCover}>
-          {buffering && (
-            <View style={{ flex: 1, justifyContent: "center" }}>
-              <ActivityIndicator size="large" color="#1CC6B1" />
-            </View>
-          )}
-        </View>
-
+        <YouTube
+          videoId={"ZqnLn_nQuqs"}
+          play={true}
+          fullscreen={false}
+          loop={false}
+          apiKey={"AIzaSyBmwnl_iMRbP6xN8nWfzod2A0-mLCfh52s"}
+          onReady={e => this.setState({ isReady: true })}
+          onChangeState={e => this.setState({ status: e.state })}
+          onChangeQuality={e => this.setState({ error: e.error })}
+          style={{ alignSelf: "stretch", height: 250 }}
+        />
         <ScrollView>
           {session.allPoses.map(pose => {
             return <Session session={pose} key={pose.id} />;
@@ -102,9 +106,10 @@ class WorkoutSession extends Component {
         </ScrollView>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => alert("this will go to the modal")}
+          // onPress={() => alert("this will go to the modal")}
         >
-          <Text style={styles.buttonText}>END SESSION</Text>
+          {/* <Text style={styles.buttonText}>END SESSION</Text> */}
+          <DailyReportModal navigation={this.props.navigation} />
         </TouchableOpacity>
       </React.Fragment>
     );

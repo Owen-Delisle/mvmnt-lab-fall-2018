@@ -7,7 +7,7 @@ import { colors } from "../../config/styles";
 
 const DailyReportsCard = ({ data }) => {
   return (
-    <View style={styles.card}>
+    <View style={styles.card} key={data.id}>
       <View style={styles.cardHeading}>
         <Text style={styles.heading}>
           {moment(data.date).format("MMM DD, YYYY")}

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import Reminders from "./Reminders";
-import propTypes from 'prop-types'
+import propTypes from "prop-types";
 
 class RemindersContainer extends Component {
   static navigationOptions = {
     title: "REMINDERS",
+    headerTintColor: "white",
     headerTitleStyle: {
       color: "white",
       fontSize: 24

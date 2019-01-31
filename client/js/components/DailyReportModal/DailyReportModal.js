@@ -43,13 +43,6 @@ class DailyReportModal extends Component {
     return avg;
   }
 
-  getDaysBetween(dateA, dateB) {
-    let startDate = moment(dateA);
-    let endDate = moment(dateB);
-    let days = endDate.diff(startDate, "days");
-    return days;
-  }
-
   setCurrentChallengeDays(challenges) {
     challenges.map(challenge => {
       if (
@@ -105,6 +98,8 @@ class DailyReportModal extends Component {
           updateChallenge={this.props.updateChallenge}
           work={this.state.work}
           userId={this.props.userId}
+          createChallenge={this.props.createChallenge}
+          navigation={this.props.navigation}
         />
 
         <TouchableOpacity
@@ -116,7 +111,7 @@ class DailyReportModal extends Component {
             this.setState({ workModal: true });
           }}
         >
-          <Text>Click Me</Text>
+          <Text style={styles.buttonText}>END SESSION</Text>
         </TouchableOpacity>
       </View>
     );

@@ -10,6 +10,7 @@ import {
   TextInput
 } from "react-native";
 import styles from "./styles";
+import moment from "moment";
 
 class PainModal extends Component {
   constructor(props) {
@@ -25,13 +26,19 @@ class PainModal extends Component {
       notes: ""
     };
   }
-
   change(pain) {
     this.setState(() => {
       return {
         pain: parseFloat(pain)
       };
     });
+  }
+
+  getDaysBetween(dateA, dateB) {
+    let startDate = moment(dateA);
+    let endDate = moment(dateB);
+    let days = endDate.diff(startDate, "days");
+    return days;
   }
 
   render() {
@@ -125,7 +132,6 @@ class PainModal extends Component {
                     notes: this.state.notes
                   }
                 });
-
                 this.props.allChallengeResponse.allChallenges.map(challenge => {
                   if (
                     challenge.startDate <= new Date().toISOString() &&
@@ -153,7 +159,7 @@ class PainModal extends Component {
                     variables: {
                       endDate: moment(new Date()).add(1, "M"),
                       startDate: new Date().toISOString(),
-                      score: this.scores,
+                      score: [this.props.work],
                       userId: this.props.userId,
                       daysBetween: this.getDaysBetween(
                         new Date().toISOString(),
@@ -163,6 +169,7 @@ class PainModal extends Component {
                   });
                 }
                 this.props.togglePainModal();
+                this.props.navigation.navigate("Main");
               }}
             >
               <Text style={styles.buttonText}>COMPLETE</Text>

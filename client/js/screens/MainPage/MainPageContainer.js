@@ -37,7 +37,7 @@ class MainPageContainer extends Component {
 }
 
 MainPageContainer.propTypes = {
-  session: propTypes.object.isRequired
+  navigation: propTypes.object.isRequired
 };
 
 export default MainPageContainer;

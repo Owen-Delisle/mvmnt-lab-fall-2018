@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontSize: 18,
     width: 50,
-    height: 20
+    height: 20,
+    paddingLeft: 10
   },
   progression: {
     borderRadius: 65,

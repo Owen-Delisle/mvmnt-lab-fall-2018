@@ -83,6 +83,16 @@ const styles = StyleSheet.create({
     width: "100%",
     borderWidth: 1,
     borderColor: "lightgray"
+  },
+  buttonText: {
+    justifyContent: "center",
+    width: 150,
+    fontSize: 20,
+    fontWeight: "bold",
+    alignSelf: "center",
+    color: "white",
+    alignSelf: "center",
+    marginTop: 10
   }
 });
 

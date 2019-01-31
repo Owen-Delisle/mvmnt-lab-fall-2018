@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
     width: 165,
     textAlign: "center",
     height: 38,
-    backgroundColor: "white"
+    backgroundColor: "white",
+    paddingTop: 10
   },
   darkHeader: {
     fontSize: 16,
@@ -40,7 +41,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     height: 38,
     paddingRight: 10,
-    backgroundColor: "#D8D8D8"
+    backgroundColor: "#D8D8D8",
+    paddingTop: 10
   },
   sessionContainer: {
     width: 300,
@@ -49,7 +51,8 @@ const styles = StyleSheet.create({
   day: {
     fontSize: 25,
     color: "#9F49E0",
-    alignSelf: "center"
+    alignSelf: "center",
+    paddingTop: 10
   },
   button: {
     width: 280,

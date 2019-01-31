@@ -16,7 +16,8 @@ const MainPage = ({ session, navigation, challenges }) => {
             <Text style={styles.text}>GROUND CONTROL</Text>
             <View style={styles.progression}>
               <Text style={styles.progressionDate}>
-                {challenges[0].score.length}/{challenges[0].daysBetween}
+                {challenges[challenges.length - 1].score.length}/
+                {challenges[0].daysBetween}
               </Text>
             </View>
             <Text style={styles.progressionText}>Progress</Text>
