@@ -7,7 +7,8 @@ const thumbnail = {
   Bear: require("../../assets/images/icons/Bear.png"),
   Superbug: require("../../assets/images/icons/Superbug.png"),
   Gargoyle: require("../../assets/images/icons/Gargoyle.png"),
-  Flamingo: require("../../assets/images/icons/Flamingo.png")
+  Flamingo: require("../../assets/images/icons/Flamingo.png"),
+  StraightJacket: require("../../assets/images/icons/StraightJacket.png")
 };
 
 const Poses = ({ navigation, poses }) => {
@@ -21,7 +22,8 @@ const Poses = ({ navigation, poses }) => {
               onPress={() => {
                 navigation.navigate("PosesDetails", {
                   id: item.id,
-                  title: item.title
+                  title: item.title,
+                  video: item.video
                 });
               }}
             >

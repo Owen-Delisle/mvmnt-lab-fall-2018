@@ -11,7 +11,7 @@ import { Query, compose, graphql } from "react-apollo";
 import UserContext from "../../context/UserContext/UserProvider";
 import CoachContext from "../../context/CoachContext/CoachProvider";
 import PropTypes from "prop-types";
-import { profileScreenQuery, AllChallengesQuery } from "../../apollo/index";
+import { QueryUser, AllChallengesQuery } from "../../apollo/index";
 
 class ProfileContainer extends Component {
   constructor(props) {
@@ -58,10 +58,7 @@ class ProfileContainer extends Component {
                   } else {
                     userId = this.props.navigation.getParam("userId");
                     return (
-                      <Query
-                        query={profileScreenQuery}
-                        variables={{ id: userId }}
-                      >
+                      <Query query={QueryUser} variables={{ id: userId }}>
                         {({ loading, error, data }) => {
                           if (loading)
                             return (
@@ -83,7 +80,9 @@ class ProfileContainer extends Component {
                                 logout={removeUserIdToken}
                                 id={userId}
                                 coachId={id}
-                                allChallenges={this.props.allChallenges.allChallenges}
+                                allChallenges={
+                                  this.props.allChallenges.allChallenges
+                                }
                               />
                             );
                           }
@@ -96,7 +95,7 @@ class ProfileContainer extends Component {
             );
           } else {
             return (
-              <Query query={profileScreenQuery} variables={{ id }}>
+              <Query query={QueryUser} variables={{ id }}>
                 {({ loading, error, data }) => {
                   if (loading)
                     return (

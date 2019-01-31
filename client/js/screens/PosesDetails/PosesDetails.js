@@ -7,17 +7,26 @@ import {
   Dimensions,
   TouchableOpacity,
   ActivityIndicator,
-  Animated
+  Animated,
+  TouchableHighlight
 } from "react-native";
 import styles from "./styles";
+import YouTube from "react-native-youtube";
 // import Video from "react-native-video";
 // import Vid from "../../assets/videos/video.mp4";
+
+//AIzaSyBmwnl_iMRbP6xN8nWfzod2A0-mLCfh52s
+
+const apiKey = "AIzaSyBmwnl_iMRbP6xN8nWfzod2A0-mLCfh52s";
+const channelId = "UCjXfkj5iapKHJrhYfAF9ZGg";
+const results = 5;
 
 const thumbnail = {
   Bear: require("../../assets/images/icons/Bear.png"),
   Superbug: require("../../assets/images/icons/Superbug.png"),
   Gargoyle: require("../../assets/images/icons/Gargoyle.png"),
-  Flamingo: require("../../assets/images/icons/Flamingo.png")
+  Flamingo: require("../../assets/images/icons/Flamingo.png"),
+  StraightJacket: require("../../assets/images/icons/StraightJacket.png")
 };
 
 class PosesDetails extends Component {
@@ -27,9 +36,31 @@ class PosesDetails extends Component {
       start: false,
       paused: true,
       buffering: true,
-      animated: new Animated.Value(0)
+      animated: new Animated.Value(0),
+      data: []
     };
   }
+
+  componentDidMount() {
+    fetch(
+      `https://www.googleapis.com/youtube/v3/search/?key=${apiKey}&channelId=${channelId}&part=snippet, 
+      id&order=date&maxResults=${results}`
+    )
+      .then(res => res.json())
+      .then(res => {
+        const videoId = [];
+        res.items.forEach(item => {
+          videoId.push(item);
+        });
+        this.setState({
+          data: videoId
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   handleLoadStart = () => {
     this.triggerBufferAnimation();
   };
@@ -62,36 +93,17 @@ class PosesDetails extends Component {
     return (
       <View>
         <ScrollView>
-          {/* <Video
-            source={Vid}
-            resizeMode="contain"
-            style={{
-              height: 250,
-              width: Dimensions.get("window").width
-            }}
-            paused={true}
-            start={true}
-            rate={1.0}
-            onLoad={this.handleLoad}
-            onBuffer={this.handleBuffer}
-          >
-            <TouchableOpacity
-              style={{ backgroundColor: "pink" }}
-              onPress={() => alert("hello")}
-            >
-              <Image
-                style={styles.playButton}
-                source={require("../../assets/images/icons/playbutton.png")}
-              />
-            </TouchableOpacity>
-          </Video> */}
-          <View style={styles.videoCover}>
-            {buffering && (
-              <View style={{ flex: 1, justifyContent: "center" }}>
-                <ActivityIndicator size="large" color="#1CC6B1" />
-              </View>
-            )}
-          </View>
+          <YouTube
+            videoId={posesDetails.video}
+            play={true}
+            fullscreen={false}
+            loop={false}
+            apiKey={apiKey}
+            onReady={e => this.setState({ isReady: true })}
+            onChangeState={e => this.setState({ status: e.state })}
+            onChangeQuality={e => this.setState({ error: e.error })}
+            style={{ alignSelf: "stretch", height: 250 }}
+          />
           <View style={styles.container}>
             <Image style={styles.icon} source={thumbnail[posesDetails.icon]} />
             <Text style={styles.title}>{posesDetails.title}</Text>
@@ -104,3 +116,17 @@ class PosesDetails extends Component {
 }
 
 export default PosesDetails;
+
+{
+  /* {this.state.data.map((item, i) => (
+            <TouchableHighlight
+              key={item.id.videoId}
+              onPress={() => console.log(item.id.videoId)}
+            >
+              <Image
+                source={{ uri: item.snippet.thumbnails.medium.url }}
+                style={{ width: 320, height: 180 }}
+              />
+            </TouchableHighlight>
+          ))} */
+}
