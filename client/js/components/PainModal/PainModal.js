@@ -26,7 +26,6 @@ class PainModal extends Component {
       notes: ""
     };
   }
-
   change(pain) {
     this.setState(() => {
       return {
@@ -133,9 +132,6 @@ class PainModal extends Component {
                     notes: this.state.notes
                   }
                 });
-                console.log(
-                  this.props.allChallengeResponse.allChallenges.length
-                );
                 this.props.allChallengeResponse.allChallenges.map(challenge => {
                   if (
                     challenge.startDate <= new Date().toISOString() &&
@@ -163,7 +159,7 @@ class PainModal extends Component {
                     variables: {
                       endDate: moment(new Date()).add(1, "M"),
                       startDate: new Date().toISOString(),
-                      score: this.scores,
+                      score: [this.props.work],
                       userId: this.props.userId,
                       daysBetween: this.getDaysBetween(
                         new Date().toISOString(),
@@ -173,6 +169,7 @@ class PainModal extends Component {
                   });
                 }
                 this.props.togglePainModal();
+                this.props.navigation.navigate("Main");
               }}
             >
               <Text style={styles.buttonText}>COMPLETE</Text>

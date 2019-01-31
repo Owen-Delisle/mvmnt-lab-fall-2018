@@ -43,7 +43,7 @@ class WorkOutSessionContainer extends Component {
 }
 
 WorkOutSessionContainer.propTypes = {
-  session: propTypes.object.isRequired
+  navigation: propTypes.object.isRequired
 };
 
 export default WorkOutSessionContainer;

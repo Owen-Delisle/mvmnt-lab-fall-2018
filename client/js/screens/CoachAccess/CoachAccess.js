@@ -62,6 +62,7 @@ const CoachAccess = ({ login, storeSessionToken }) => {
                         style={styles.input}
                         placeholderTextColor="white"
                         autoCapitalize="none"
+                        secureTextEntry={true}
                       />
                     )}
                   </Field>

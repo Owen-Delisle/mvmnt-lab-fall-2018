@@ -9,24 +9,26 @@ import { AllChallengesQuery } from "../../apollo";
 
 class DailyReportModalContainer extends Component {
   render() {
+    console.log("NAV:", this.props.navigation);
     return (
       <UserContext.Consumer>
         {({ id }) => {
           return (
-            // <Query query={AllChallengesQuery} variables={{ userId: id }}>
-            //   {({ data }) => {
-            // return (
-            <DailyReportModal
-              createReport={this.props.createReport}
-              updateChallenge={this.props.updateChallenge}
-              allChallenges={this.props.allChallenges}
-              createChallenge={this.props.createChallenge}
-              userId={id}
-            />
+            <Query query={AllChallengesQuery} variables={{ userId: id }}>
+              {({ data }) => {
+                return (
+                  <DailyReportModal
+                    createReport={this.props.createReport}
+                    updateChallenge={this.props.updateChallenge}
+                    allChallenges={data}
+                    createChallenge={this.props.createChallenge}
+                    userId={id}
+                    navigation={this.props.navigation}
+                  />
+                );
+              }}
+            </Query>
           );
-          //   }}
-          // </Query>
-          // );
         }}
       </UserContext.Consumer>
     );
@@ -40,9 +42,9 @@ export default compose(
   graphql(UpdateChallengeMutation, {
     name: "updateChallenge"
   }),
-  graphql(AllChallengesQuery, {
-    name: "allChallenges"
-  }),
+  // graphql(AllChallengesQuery, {
+  //   name: "allChallenges"
+  // }),
   graphql(CreateChallengeMutation, {
     name: "createChallenge"
   })

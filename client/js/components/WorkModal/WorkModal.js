@@ -43,7 +43,7 @@ class WorkModal extends Component {
         >
           <View style={styles.modalContentContainer}>
             <View style={styles.headingContainer}>
-              <Text style={styles.heading}>DAY {this.props.days}</Text>
+              <Text style={styles.heading}>DAY {this.props.days + 1}</Text>
               <Image source={require("../../assets/images/checkmark.png")} />
               <Text style={styles.secondaryHeading}>Well Done!</Text>
             </View>

@@ -20,6 +20,7 @@ const PoseDetailsQuery = gql`
 class PosesDetailsContainer extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.getParam("title"),
+    headerTintColor: "white",
     headerTitleStyle: {
       color: "white",
       fontSize: 24
@@ -52,7 +53,7 @@ class PosesDetailsContainer extends Component {
 }
 
 PosesDetailsContainer.propTypes = {
-  poses: propTypes.object.isRequired
+  navigation: propTypes.object.isRequired
 };
 
 export default PosesDetailsContainer;

@@ -99,6 +99,7 @@ class DailyReportModal extends Component {
           work={this.state.work}
           userId={this.props.userId}
           createChallenge={this.props.createChallenge}
+          navigation={this.props.navigation}
         />
 
         <TouchableOpacity
@@ -110,7 +111,7 @@ class DailyReportModal extends Component {
             this.setState({ workModal: true });
           }}
         >
-          <Text>Click Me</Text>
+          <Text style={styles.buttonText}>END SESSION</Text>
         </TouchableOpacity>
       </View>
     );

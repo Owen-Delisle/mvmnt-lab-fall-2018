@@ -38,6 +38,7 @@ const days = [
 ];
 
 const DailyReports = ({ data }) => {
+  _keyExtractor = item => item.id;
   return (
     <View>
       <ImageBackground
@@ -46,6 +47,7 @@ const DailyReports = ({ data }) => {
       />
 
       <FlatList
+        keyExtractor={this._keyExtractor}
         data={days}
         horizontal={true}
         renderItem={({ item: days }) => {
@@ -58,6 +60,7 @@ const DailyReports = ({ data }) => {
       />
 
       <FlatList
+        keyExtractor={this._keyExtractor}
         data={data.allDailyReports}
         horizontal={true}
         renderItem={({ item: rowData }) => {

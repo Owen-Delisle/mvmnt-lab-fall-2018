@@ -13,6 +13,7 @@ const Profile = ({
   allChallenges,
   coachId
 }) => {
+  console.log(allChallenges);
   return (
     <View style={styles.profileWrapper}>
       <View style={styles.profileHeader}>
@@ -47,6 +48,7 @@ const Profile = ({
                     );
                   }
                 })}
+              <Text style={styles.progressionText}>1 / 30</Text>
             </View>
           </LinearGradient>
           <Text style={styles.headerItemsText}>Progress</Text>
@@ -56,7 +58,9 @@ const Profile = ({
       <TouchableOpacity
         style={styles.profileOptions}
         onPress={() => {
-          navigation.navigate("DailyReports");
+          navigation.navigate("DailyReports", {
+            userId: id
+          });
         }}
       >
         <Text style={styles.profileOptionsText}>Daily Reports </Text>

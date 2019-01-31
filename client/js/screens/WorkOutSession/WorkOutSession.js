@@ -11,8 +11,8 @@ import {
 } from "react-native";
 import styles from "./styles";
 import Session from "../../components/Session";
-// import Video from "react-native-video";
-// import Vid from "../../assets/videos/video.mp4";
+import Video from "react-native-video";
+import Vid from "../../assets/videos/video.mp4";
 import DailyReportModal from "../../components/DailyReportModal";
 
 class WorkoutSession extends Component {
@@ -57,7 +57,8 @@ class WorkoutSession extends Component {
     const { buffering } = this.state;
     return (
       <React.Fragment>
-        {/* <Video
+        <Video
+          volume={1.0}
           source={Vid}
           resizeMode="contain"
           style={{
@@ -87,7 +88,7 @@ class WorkoutSession extends Component {
               source={require("../../assets/images/icons/playbutton.png")}
             />
           </TouchableOpacity>
-        </Video> */}
+        </Video>
         <View style={styles.videoCover}>
           {buffering && (
             <View style={{ flex: 1, justifyContent: "center" }}>
@@ -106,7 +107,7 @@ class WorkoutSession extends Component {
           // onPress={() => alert("this will go to the modal")}
         >
           {/* <Text style={styles.buttonText}>END SESSION</Text> */}
-          <DailyReportModal />
+          <DailyReportModal navigation={this.props.navigation} />
         </TouchableOpacity>
       </React.Fragment>
     );

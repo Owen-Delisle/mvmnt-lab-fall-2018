@@ -36,22 +36,52 @@ class DailyReportsContainer extends Component {
   render() {
     return (
       <UserContext.Consumer>
-        {({ id }) => (
-          <Query query={DailyReportQuery} variables={{ userId: id }}>
-            {({ loading, error, data }) => {
-              if (loading)
-                return (
-                  <View style={styles.container}>
-                    <ActivityIndicator />
-                  </View>
-                );
-              if (error) return `${error}`;
-              if (data) {
-                return <DailyReports data={data} />;
-              }
-            }}
-          </Query>
-        )}
+        {({ id }) => {
+          if (!id) {
+            userId = this.props.navigation.getParam("userId");
+            return (
+              <Query
+                query={DailyReportQuery}
+                variables={{ userId }}
+                fetchPolicy="network-only"
+              >
+                {({ loading, error, data }) => {
+                  if (loading)
+                    return (
+                      <View style={{ flex: 1, justifyContent: "center" }}>
+                        <ActivityIndicator size="large" color="#1CC6B1" />
+                      </View>
+                    );
+                  if (error) return <Text>{error}</Text>;
+                  if (data) {
+                    return <DailyReports data={data} />;
+                  }
+                }}
+              </Query>
+            );
+          } else {
+            return (
+              <Query
+                query={DailyReportQuery}
+                variables={{ userId: id }}
+                fetchPolicy="network-only"
+              >
+                {({ loading, error, data }) => {
+                  if (loading)
+                    return (
+                      <View style={{ flex: 1, justifyContent: "center" }}>
+                        <ActivityIndicator size="large" color="#1CC6B1" />
+                      </View>
+                    );
+                  if (error) return `${error}`;
+                  if (data) {
+                    return <DailyReports data={data} />;
+                  }
+                }}
+              </Query>
+            );
+          }
+        }}
       </UserContext.Consumer>
     );
   }

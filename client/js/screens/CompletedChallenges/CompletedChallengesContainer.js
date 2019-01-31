@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import CompletedChallenges from "./CompletedChallenges";
-import { Text, View } from "react-native";
+import { Text, View, ActivityIndicator } from "react-native";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import UserContext from "../../context/UserContext/UserProvider";
+import { withNavigationFocus } from "react-navigation";
 
 const AllChallengesQuery = gql`
   query AllChallenges($userId: String) {
@@ -30,6 +31,7 @@ class CompletedChallengesContainer extends Component {
       borderBottomColor: "transparent"
     }
   };
+
   render() {
     return (
       <UserContext.Consumer>
@@ -37,9 +39,18 @@ class CompletedChallengesContainer extends Component {
           if (!id) {
             userId = this.props.navigation.getParam("userId");
             return (
-              <Query query={AllChallengesQuery} variables={{ userId }}>
+              <Query
+                query={AllChallengesQuery}
+                variables={{ userId }}
+                fetchPolicy="network-only"
+              >
                 {({ loading, error, data }) => {
-                  if (loading) return <Text>Loading</Text>;
+                  if (loading)
+                    return (
+                      <View style={{ flex: 1, justifyContent: "center" }}>
+                        <ActivityIndicator size="large" color="#1CC6B1" />
+                      </View>
+                    );
                   if (error) return <Text>{error}</Text>;
                   if (data) {
                     return <CompletedChallenges data={data} />;
@@ -49,12 +60,27 @@ class CompletedChallengesContainer extends Component {
             );
           } else {
             return (
-              <Query query={AllChallengesQuery} variables={{ userId: id }}>
-                {({ loading, error, data }) => {
-                  if (loading) return <Text>Loading</Text>;
+              <Query
+                query={AllChallengesQuery}
+                variables={{ userId: id }}
+                fetchPolicy="network-only"
+              >
+                {({ loading, error, data, refetch }) => {
+                  if (loading)
+                    return (
+                      <View style={{ flex: 1, justifyContent: "center" }}>
+                        <ActivityIndicator size="large" color="#1CC6B1" />
+                      </View>
+                    );
                   if (error) return <Text>{error}</Text>;
                   if (data) {
-                    return <CompletedChallenges data={data} />;
+                    return (
+                      <CompletedChallenges
+                        data={data}
+                        refetch={refetch}
+                        userId={id}
+                      />
+                    );
                   }
                 }}
               </Query>
@@ -66,4 +92,4 @@ class CompletedChallengesContainer extends Component {
   }
 }
 
-export default CompletedChallengesContainer;
+export default withNavigationFocus(CompletedChallengesContainer);

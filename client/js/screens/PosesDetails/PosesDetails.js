@@ -10,8 +10,8 @@ import {
   Animated
 } from "react-native";
 import styles from "./styles";
-// import Video from "react-native-video";
-// import Vid from "../../assets/videos/video.mp4";
+import Video from "react-native-video";
+import Vid from "../../assets/videos/video.mp4";
 
 const thumbnail = {
   Bear: require("../../assets/images/icons/Bear.png"),
@@ -62,7 +62,8 @@ class PosesDetails extends Component {
     return (
       <View>
         <ScrollView>
-          {/* <Video
+          <Video
+            volume={1.0}
             source={Vid}
             resizeMode="contain"
             style={{
@@ -84,7 +85,7 @@ class PosesDetails extends Component {
                 source={require("../../assets/images/icons/playbutton.png")}
               />
             </TouchableOpacity>
-          </Video> */}
+          </Video>
           <View style={styles.videoCover}>
             {buffering && (
               <View style={{ flex: 1, justifyContent: "center" }}>
