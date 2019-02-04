@@ -17,6 +17,7 @@ class DailyReportModalContainer extends Component {
               {({ data }) => {
                 return (
                   <DailyReportModal
+                    workoutCompleted={this.props.workoutCompleted}
                     createReport={this.props.createReport}
                     updateChallenge={this.props.updateChallenge}
                     allChallenges={data}

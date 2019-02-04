@@ -87,6 +87,7 @@ class DailyReportModal extends Component {
           togglePainModal={this.togglePainModal.bind(this)}
           setWork={this.setWork.bind(this)}
           days={this.days}
+          fname={this.props.fname}
         />
 
         <PainModal
@@ -103,12 +104,17 @@ class DailyReportModal extends Component {
         />
 
         <TouchableOpacity
+          style={styles.button}
           onPress={() => {
-            this.allChallengeResponse = this.props.allChallenges;
-            this.setCurrentChallengeDays(
-              this.allChallengeResponse.allChallenges
-            );
-            this.setState({ workModal: true });
+            if (this.props.workoutCompleted) {
+              this.allChallengeResponse = this.props.allChallenges;
+              this.setCurrentChallengeDays(
+                this.allChallengeResponse.allChallenges
+              );
+              this.setState({ workModal: true });
+            } else {
+              this.props.navigation.navigate("Main");
+            }
           }}
         >
           <Text style={styles.buttonText}>END SESSION</Text>

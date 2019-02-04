@@ -28,12 +28,10 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   button: {
-    width: 300,
-    borderRadius: 30,
+    width: width,
+    height: 60,
     alignSelf: "center",
-    backgroundColor: "white",
-    borderColor: "black",
-    borderWidth: 1
+    backgroundColor: "#9F49E0"
   },
   buttonText: {
     alignSelf: "center",

@@ -116,17 +116,3 @@ class PosesDetails extends Component {
 }
 
 export default PosesDetails;
-
-{
-  /* {this.state.data.map((item, i) => (
-            <TouchableHighlight
-              key={item.id.videoId}
-              onPress={() => console.log(item.id.videoId)}
-            >
-              <Image
-                source={{ uri: item.snippet.thumbnails.medium.url }}
-                style={{ width: 320, height: 180 }}
-              />
-            </TouchableHighlight>
-          ))} */
-}

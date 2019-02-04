@@ -30,6 +30,17 @@ const MainStack = createStackNavigator(
   }
 );
 
+MainStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible
+  };
+};
+
 export const CoachStack = createStackNavigator(
   {
     Client: ClientScreen,
@@ -76,6 +87,7 @@ const ProfileStack = createStackNavigator(
 export const AppStack = createBottomTabNavigator(
   { Poses: PosesStack, Main: MainStack, Profile: ProfileStack },
   {
+    initialRouteName: "Main",
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused }) => {
         const { routeName } = navigation.state;
@@ -84,6 +96,7 @@ export const AppStack = createBottomTabNavigator(
         let showStyle = true;
 
         if (routeName === "Main") {
+          tabBarVisible: false;
           focused
             ? (image = require("../assets/images/workout-active.png"))
             : (image = require("../assets/images/workout-inactive.png"));

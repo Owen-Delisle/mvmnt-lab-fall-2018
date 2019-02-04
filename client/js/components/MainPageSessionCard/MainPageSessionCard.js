@@ -72,12 +72,10 @@ class MainPageSessionCard extends Component {
 
           <TouchableOpacity
             onPress={() => {
-              console.log(session.poses);
               videos = [];
               session.poses.map(pose => {
                 videos.push(pose.video);
               });
-              console.log("PAANINA", videos);
               navigation.navigate("WorkoutSession", {
                 poses: session.poses,
                 videos: videos

@@ -18,7 +18,7 @@ class WorkoutSession extends Component {
   constructor() {
     super();
     this.state = {
-      start: false,
+      workoutCompleted: false,
       paused: true,
       buffering: true,
       animated: new Animated.Value(0),
@@ -30,13 +30,11 @@ class WorkoutSession extends Component {
   componentDidMount() {
     this.props.navigation.getParam("poses").map(pose => {
       this.setState({ videoList: this.state.videoList.push(pose.video) });
-      console.log("HELLER", this.state.videoList);
     });
   }
 
   render() {
     const { navigation } = this.props;
-    console.log("KELLER", this.state.videoList);
     return (
       <React.Fragment>
         <YouTube
@@ -46,12 +44,18 @@ class WorkoutSession extends Component {
           loop={false}
           apiKey={"AIzaSyBmwnl_iMRbP6xN8nWfzod2A0-mLCfh52s"}
           onReady={e => this.setState({ isReady: true })}
+          rel={false}
           onChangeState={e => {
             this.setState({ status: e.state }),
               e.state === "ended" &&
                 this.state.videoQueue <
                   navigation.getParam("videos").length - 1 &&
                 this.setState({ videoQueue: this.state.videoQueue + 1 });
+
+            e.state === "ended" &&
+              this.state.videoQueue ===
+                navigation.getParam("videos").length - 1 &&
+              this.setState({ workoutCompleted: true });
           }}
           onChangeQuality={e => this.setState({ error: e.error })}
           style={{ alignSelf: "stretch", height: 250 }}
@@ -62,7 +66,10 @@ class WorkoutSession extends Component {
           })}
         </ScrollView>
         <TouchableOpacity style={styles.button}>
-          <DailyReportModal navigation={this.props.navigation} />
+          <DailyReportModal
+            navigation={this.props.navigation}
+            workoutCompleted={this.state.workoutCompleted}
+          />
         </TouchableOpacity>
       </React.Fragment>
     );
