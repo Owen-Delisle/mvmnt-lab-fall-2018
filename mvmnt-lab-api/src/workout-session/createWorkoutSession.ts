@@ -1,15 +1,13 @@
 import { fromEvent, FunctionEvent } from "graphcool-lib";
 import { GraphQLClient } from "graphql-request";
 
-interface Pose {
+interface WorkoutSession {
   id: string;
 }
 
 interface EventData {
-  icon: string;
-  title: string;
-  duration: string;
-  video: string;
+  day: number;
+  poses: [string];
 }
 
 export default async (event: FunctionEvent<EventData>) => {
@@ -17,30 +15,26 @@ export default async (event: FunctionEvent<EventData>) => {
     const graphcool = fromEvent(event);
     const api = graphcool.api("simple/v1");
 
-    const { icon, title, duration, video } = event.data;
+    const { day, poses } = event.data;
 
-    const pose = await createGraphcoolPose(api, icon, title, duration, video);
+    const workoutSession = await createGraphcoolWorkoutSession(api, day, poses);
 
-    return { data: { pose } };
+    return { data: { workoutSession } };
   } catch (e) {
     return { error: e };
   }
 };
 
-async function createGraphcoolPose(
+async function createGraphcoolWorkoutSession(
   api: GraphQLClient,
-  icon: string,
-  title: string,
-  duration: string,
-  video: string
+  day: number,
+  poses: [string]
 ): Promise<string> {
   const mutation = `
-      mutation createGraphcoolPose($icon: String!, $title: String!, $duration: String!, $video: String!) {
+      mutation createGraphcoolWorkoutSession($day: Int!, $poses: [Pose!]!) {
         createPose(
-          icon: $email,
-          title: $password,
-          duration: $firstname,
-          video: $lastname
+          day: $day,
+          poses: $poses
         ) {
           id
         }
@@ -48,13 +42,11 @@ async function createGraphcoolPose(
     `;
 
   const variables = {
-    icon,
-    title,
-    duration,
-    video
+    day,
+    poses
   };
 
   return api
-    .request<{ createPose: Pose }>(mutation, variables)
-    .then(r => r.createPose.id);
+    .request<{ createWorkoutSession: WorkoutSession }>(mutation, variables)
+    .then(r => r.createWorkoutSession.id);
 }

@@ -21,94 +21,47 @@ class WorkoutSession extends Component {
       start: false,
       paused: true,
       buffering: true,
-      animated: new Animated.Value(0)
+      animated: new Animated.Value(0),
+      videoList: [],
+      videoQueue: 0
     };
   }
 
-  handleLoadStart = () => {
-    this.triggerBufferAnimation();
-  };
-
-  triggerBufferAnimation = () => {
-    this.loopingAnimation && this.loopingAnimation.stopAnimation();
-    this.loopingAnimation = Animated.loop(
-      Animated.timing(this.state.animated, {
-        toValue: 1,
-        duration: 350
-      })
-    ).start();
-  };
-
-  handleBuffer = meta => {
-    meta.isBuffering && this.triggerBufferAnimation();
-
-    if (this.loopingAnimation && !meta.isBuffering) {
-      this.loopingAnimation.stopAnimation();
-    }
-
-    this.setState({
-      buffering: meta.isBuffering
+  componentDidMount() {
+    this.props.navigation.getParam("poses").map(pose => {
+      this.setState({ videoList: this.state.videoList.push(pose.video) });
+      console.log("HELLER", this.state.videoList);
     });
-  };
+  }
 
   render() {
-    cosnt = { session, navigation } = this.props;
-    const { buffering } = this.state;
+    const { navigation } = this.props;
+    console.log("KELLER", this.state.videoList);
     return (
       <React.Fragment>
-        {/* <Video
-          volume={1.0}
-          source={Vid}
-          resizeMode="contain"
-          style={{
-            height: 250,
-            width: Dimensions.get("window").width
-          }}
-          paused={true}
-          start={true}
-          rate={1.0}
-          onLoad={this.handleLoad}
-          onBuffer={this.handleBuffer}
-        >
-          <TouchableOpacity
-            style={
-              this.state.paused
-                ? styles.buttonContainer
-                : styles.buttonContainerFalse
-            }
-            onPress={() =>
-              this.setState({
-                paused: !this.state.paused
-              })
-            }
-          >
-            <Image
-              style={styles.playButton}
-              source={require("../../assets/images/icons/playbutton.png")}
-            />
-          </TouchableOpacity>
-        </Video> */}
         <YouTube
-          videoId={"ZqnLn_nQuqs"}
+          videoId={navigation.getParam("videos")[this.state.videoQueue]}
           play={true}
           fullscreen={false}
           loop={false}
           apiKey={"AIzaSyBmwnl_iMRbP6xN8nWfzod2A0-mLCfh52s"}
           onReady={e => this.setState({ isReady: true })}
-          onChangeState={e => this.setState({ status: e.state })}
+          onChangeState={e => {
+            this.setState({ status: e.state }),
+              e.state === "ended" &&
+                this.state.videoQueue <
+                  navigation.getParam("videos").length - 1 &&
+                this.setState({ videoQueue: this.state.videoQueue + 1 });
+          }}
           onChangeQuality={e => this.setState({ error: e.error })}
           style={{ alignSelf: "stretch", height: 250 }}
         />
         <ScrollView>
-          {session.allPoses.map(pose => {
+          {navigation.getParam("poses").map(pose => {
             return <Session session={pose} key={pose.id} />;
           })}
         </ScrollView>
-        <TouchableOpacity
-          style={styles.button}
-          // onPress={() => alert("this will go to the modal")}
-        >
-          {/* <Text style={styles.buttonText}>END SESSION</Text> */}
+        <TouchableOpacity style={styles.button}>
           <DailyReportModal navigation={this.props.navigation} />
         </TouchableOpacity>
       </React.Fragment>

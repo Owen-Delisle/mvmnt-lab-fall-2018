@@ -8,14 +8,15 @@ class MainPageSessionCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showLight: true
+      showLight: true,
+      videoList: []
     };
   }
 
   render() {
-    const { session, navigation, challenges } = this.props;
+    const { session, navigation } = this.props;
     return (
-      <View style={styles.card} key={challenges.id}>
+      <View style={styles.card} key={session.id}>
         <View style={styles.headerContainer}>
           <TouchableOpacity
             onPress={() =>
@@ -52,25 +53,36 @@ class MainPageSessionCard extends Component {
           <View>
             <Text style={styles.day}>
               DAY
-              {challenges.score.length}
+              {session.day}
             </Text>
           </View>
           {this.state.showLight ? (
             <ScrollView>
-              {session.map(pose => {
+              {session.poses.map(pose => {
                 return <Session session={pose} key={pose.id} />;
               })}
             </ScrollView>
           ) : (
             <ScrollView>
-              {session.map(pose => {
+              {session.poses.map(pose => {
                 return <Session session={pose} key={pose.id} />;
               })}
             </ScrollView>
           )}
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("WorkOut")}
+            onPress={() => {
+              console.log(session.poses);
+              videos = [];
+              session.poses.map(pose => {
+                videos.push(pose.video);
+              });
+              console.log("PAANINA", videos);
+              navigation.navigate("WorkoutSession", {
+                poses: session.poses,
+                videos: videos
+              });
+            }}
             style={styles.button}
           >
             <Text style={styles.buttonText}>START</Text>

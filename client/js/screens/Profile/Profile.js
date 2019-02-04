@@ -13,7 +13,6 @@ const Profile = ({
   allChallenges,
   coachId
 }) => {
-  console.log(allChallenges);
   return (
     <View style={styles.profileWrapper}>
       <View style={styles.profileHeader}>

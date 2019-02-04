@@ -109,13 +109,17 @@ export const AllDataQuery = gql`
       startDate
       userId
     }
-    allPoses {
-      description
-      duration
-      icon
+    allWorkoutSessions {
       id
-      title
-      video
+      day
+      poses {
+        description
+        duration
+        icon
+        id
+        title
+        video
+      }
     }
   }
 `;

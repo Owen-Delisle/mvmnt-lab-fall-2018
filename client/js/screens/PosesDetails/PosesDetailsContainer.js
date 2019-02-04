@@ -43,7 +43,6 @@ class PosesDetailsContainer extends Component {
             );
           if (error) return <Text>`${error}`</Text>;
           if (data) {
-            console.log(this.props.navigation);
             return <PosesDetails posesDetails={data.Pose} />;
           }
         }}

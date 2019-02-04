@@ -3,10 +3,5 @@ type CreateWorkoutSessionPayload {
 }
 
 extend type Mutation {
-  addPose(
-    icon: String!
-    title: String!
-    duration: String!
-    video: String!
-  ): CreatePosePayload
+  addWorkoutSession(day: Int!, poses: [Pose!]!): CreateWorkoutSessionPayload
 }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import MainPage from "./MainPage";
 import propTypes from "prop-types";
 import { Query } from "react-apollo";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, View, Text } from "react-native";
 import { AllDataQuery } from "../../apollo";
 
 class MainPageContainer extends Component {
@@ -20,12 +20,12 @@ class MainPageContainer extends Component {
                 <ActivityIndicator size="large" color="#1CC6B1" />
               </View>
             );
-          if (error) return `${error}`;
+          if (error) return <Text>`${error}`</Text>;
           if (data) {
             return (
               <MainPage
                 navigation={this.props.navigation}
-                session={data.allPoses}
+                session={data.allWorkoutSessions}
                 challenges={data.allChallenges}
               />
             );
@@ -37,7 +37,7 @@ class MainPageContainer extends Component {
 }
 
 MainPageContainer.propTypes = {
-  navigation: propTypes.object.isRequired
+  session: propTypes.object.isRequired
 };
 
 export default MainPageContainer;

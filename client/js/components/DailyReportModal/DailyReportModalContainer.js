@@ -9,7 +9,6 @@ import { AllChallengesQuery } from "../../apollo";
 
 class DailyReportModalContainer extends Component {
   render() {
-    console.log("NAV:", this.props.navigation);
     return (
       <UserContext.Consumer>
         {({ id }) => {

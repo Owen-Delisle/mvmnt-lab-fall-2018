@@ -17,6 +17,7 @@ type Pose @model {
   description: String!
   duration: String!
   video: String!
+  sessions: [WorkoutSession!]! @relation(name: "SessionPoses")
 }
 
 type DailyReport @model {
@@ -37,4 +38,10 @@ type Challenge @model {
   startDate: DateTime!
   endDate: DateTime!
   daysBetween: Int!
+}
+
+type WorkoutSession @model {
+  id: ID! @isUnique
+  day: Int!
+  poses: [Pose!]! @relation(name: "SessionPoses")
 }

@@ -13,8 +13,15 @@ import styles from "./styles";
 import PropTypes from "prop-types";
 import { Mutation } from "react-apollo";
 import { UpdateUserMutation, QueryUser } from "../../apollo/";
+import ImagePicker from "react-native-image-picker";
 
 class EditProfileForm extends React.Component {
+  handleChoosePhoto = () => {
+    const options = {};
+    ImagePicker.launchImageLibrary(options, response => {
+      console.log("Response", response);
+    });
+  };
   render() {
     const { id, navigation, user } = this.props;
 
@@ -25,7 +32,10 @@ class EditProfileForm extends React.Component {
             source={require("../../assets/images/placeholder.jpg")}
             style={styles.avatar}
           />
-          <TouchableOpacity style={styles.profileEditButton}>
+          <TouchableOpacity
+            style={styles.profileEditButton}
+            onPress={this.handleChoosePhoto}
+          >
             <Text>EDIT </Text>
           </TouchableOpacity>
         </React.Fragment>

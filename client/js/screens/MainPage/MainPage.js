@@ -25,7 +25,7 @@ const MainPage = ({ session, navigation, challenges }) => {
         </ImageBackground>
         <View style={styles.card}>
           <FlatList
-            data={challenges}
+            data={session}
             horizontal={true}
             keyExtractor={this._keyExtractor}
             renderItem={({ item: rowData }) => {
@@ -33,8 +33,7 @@ const MainPage = ({ session, navigation, challenges }) => {
                 <View>
                   <MainPageSessionCard
                     navigation={navigation}
-                    session={session}
-                    challenges={rowData}
+                    session={rowData}
                   />
                 </View>
               );
