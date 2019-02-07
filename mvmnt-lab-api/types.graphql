@@ -17,6 +17,7 @@ type Pose @model {
   description: String!
   duration: String!
   video: String!
+  heavyVideo: String!
   sessions: [WorkoutSession!]! @relation(name: "SessionPoses")
 }
 

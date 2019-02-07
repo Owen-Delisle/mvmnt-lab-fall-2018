@@ -78,7 +78,8 @@ class MainPageSessionCard extends Component {
               });
               navigation.navigate("WorkoutSession", {
                 poses: session.poses,
-                videos: videos
+                videos: videos,
+                renderHeavyVideos: this.state.showLight
               });
             }}
             style={styles.button}

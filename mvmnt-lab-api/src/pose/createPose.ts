@@ -10,6 +10,7 @@ interface EventData {
   title: string;
   duration: string;
   video: string;
+  heavyVideo: string;
 }
 
 export default async (event: FunctionEvent<EventData>) => {
@@ -17,9 +18,16 @@ export default async (event: FunctionEvent<EventData>) => {
     const graphcool = fromEvent(event);
     const api = graphcool.api("simple/v1");
 
-    const { icon, title, duration, video } = event.data;
+    const { icon, title, duration, video, heavyVideo } = event.data;
 
-    const pose = await createGraphcoolPose(api, icon, title, duration, video);
+    const pose = await createGraphcoolPose(
+      api,
+      icon,
+      title,
+      duration,
+      video,
+      heavyVideo
+    );
 
     return { data: { pose } };
   } catch (e) {
@@ -32,15 +40,17 @@ async function createGraphcoolPose(
   icon: string,
   title: string,
   duration: string,
-  video: string
+  video: string,
+  heavyVideo: string
 ): Promise<string> {
   const mutation = `
-      mutation createGraphcoolPose($icon: String!, $title: String!, $duration: String!, $video: String!) {
+      mutation createGraphcoolPose($icon: String!, $title: String!, $duration: String!, $video: String!, $heavyVideo: String!) {
         createPose(
-          icon: $email,
-          title: $password,
-          duration: $firstname,
-          video: $lastname
+          icon: $icon,
+          title: $title,
+          duration: $duration,
+          video: $video,
+          heavyVideo: $heavyVideo
         ) {
           id
         }
@@ -51,7 +61,8 @@ async function createGraphcoolPose(
     icon,
     title,
     duration,
-    video
+    video,
+    heavyVideo
   };
 
   return api

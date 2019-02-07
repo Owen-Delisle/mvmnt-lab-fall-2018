@@ -8,5 +8,6 @@ extend type Mutation {
     title: String!
     duration: String!
     video: String!
+    heavyVideo: String!
   ): CreatePosePayload
 }
