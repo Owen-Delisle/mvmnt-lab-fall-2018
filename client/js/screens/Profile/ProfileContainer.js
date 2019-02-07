@@ -56,6 +56,8 @@ class ProfileContainer extends Component {
                   if (!id) {
                     this.props.navigation.navigate("Auth");
                   } else {
+                    console.log("1");
+                    console.log(this.props.navigation.getParam("userId"));
                     userId = this.props.navigation.getParam("userId");
                     return (
                       <Query query={QueryUser} variables={{ id: userId }}>
@@ -73,6 +75,7 @@ class ProfileContainer extends Component {
                             );
                           if (error) return <Text>{error}</Text>;
                           if (data) {
+                            console.log(this.props);
                             return (
                               <Profile
                                 navigation={this.props.navigation}
@@ -94,6 +97,7 @@ class ProfileContainer extends Component {
               </CoachContext.Consumer>
             );
           } else {
+            console.log(2);
             return (
               <Query query={QueryUser} variables={{ id }}>
                 {({ loading, error, data }) => {
@@ -126,9 +130,15 @@ class ProfileContainer extends Component {
 }
 
 export default compose(
-  graphql(AllChallengesQuery, {
-    name: "allChallenges"
-  })
+  graphql(
+    AllChallengesQuery,
+    {
+      name: "allChallenges"
+    },
+    {
+      variables: { userId: "cjqzkqag704fx017744u9sfz0" }
+    }
+  )
 )(ProfileContainer);
 
 ProfileContainer.defaultProps = {

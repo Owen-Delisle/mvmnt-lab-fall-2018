@@ -61,7 +61,7 @@ const DailyReports = ({ data }) => {
 
       <FlatList
         keyExtractor={this._keyExtractor}
-        data={data.allDailyReports}
+        data={data.allDailyReports.reverse()}
         horizontal={true}
         renderItem={({ item: rowData }) => {
           return <DailyReportsCard data={rowData} />;

@@ -52,9 +52,21 @@ export const UpdateChallengeMutation = gql`
   }
 `;
 
+// export const AllChallengesQuery = gql`
+//   query AllChallenges {
+//     allChallenges {
+//       id
+//       startDate
+//       endDate
+//       score
+//       daysBetween
+//     }
+//   }
+// `;
+
 export const AllChallengesQuery = gql`
-  query AllChallenges {
-    allChallenges {
+  query AllChallenges($userId: String) {
+    allChallenges(filter: { userId: $userId }) {
       id
       startDate
       endDate

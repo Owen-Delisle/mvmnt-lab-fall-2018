@@ -23,7 +23,9 @@ class WorkoutSession extends Component {
       buffering: true,
       animated: new Animated.Value(0),
       videoList: [],
-      videoQueue: 0
+      videoQueue: 0,
+      loadingPercentage: 0,
+      videoDuration: 0
     };
   }
 
@@ -39,7 +41,7 @@ class WorkoutSession extends Component {
       <React.Fragment>
         <YouTube
           videoId={navigation.getParam("videos")[this.state.videoQueue]}
-          play={true}
+          play={false}
           fullscreen={false}
           loop={false}
           apiKey={"AIzaSyBmwnl_iMRbP6xN8nWfzod2A0-mLCfh52s"}
@@ -56,13 +58,30 @@ class WorkoutSession extends Component {
               this.state.videoQueue ===
                 navigation.getParam("videos").length - 1 &&
               this.setState({ workoutCompleted: true });
+
+            e.state === "ended" && this.setState({ loadingPercentage: 0 });
           }}
           onChangeQuality={e => this.setState({ error: e.error })}
-          style={{ alignSelf: "stretch", height: 250 }}
+          style={{
+            alignSelf: "stretch",
+            height: 250
+          }}
+          onProgress={e => {
+            this.setState({ loadingPercentage: e.currentTime });
+            this.setState({ videoDuration: e.duration });
+          }}
         />
         <ScrollView>
           {navigation.getParam("poses").map(pose => {
-            return <Session session={pose} key={pose.id} />;
+            return (
+              <Session
+                session={pose}
+                key={pose.id}
+                loadingPercentage={this.state.loadingPercentage}
+                videoDuration={this.state.videoDuration}
+                videoId={navigation.getParam("videos")[this.state.videoQueue]}
+              />
+            );
           })}
         </ScrollView>
         <TouchableOpacity style={styles.button}>

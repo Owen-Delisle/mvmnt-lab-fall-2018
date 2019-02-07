@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: globalStyles.container,
   sessionContainer: {
     width: width,
-    height: 80,
+    height: 110,
     flexDirection: "row",
     justifyContent: "space-evenly",
     textAlign: "center",
