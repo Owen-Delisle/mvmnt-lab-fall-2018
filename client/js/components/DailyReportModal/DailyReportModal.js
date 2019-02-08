@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, Alert } from "react-native";
 import moment from "moment";
 import styles from "./styles";
 import PropTypes from "prop-types";
@@ -113,7 +113,22 @@ class DailyReportModal extends Component {
               );
               this.setState({ workModal: true });
             } else {
-              this.props.navigation.navigate("Main");
+              Alert.alert(
+                "End Session?",
+                "Are you sure you want to end this session, your progress wont be recorded or saved.",
+                [
+                  {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                  },
+                  {
+                    text: "End",
+                    onPress: () => this.props.navigation.navigate("Main")
+                  }
+                ],
+                { cancelable: false }
+              );
             }
           }}
         >

@@ -7,14 +7,12 @@ const Client = ({ client, navigation }) => {
   return (
     <SectionList
       renderItem={({ item }) => {
-        console.log(item.id);
         return (
           <ScrollView>
             <View style={styles.itemContainer} key={item.id}>
               <TouchableOpacity
                 style={styles.container}
                 onPress={() => {
-                  console.log(item.id);
                   navigation.navigate("Profile", {
                     userId: item.id
                   });

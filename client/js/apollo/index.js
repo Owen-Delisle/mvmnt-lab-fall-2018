@@ -131,6 +131,7 @@ export const AllDataQuery = gql`
         id
         title
         video
+        heavyVideo
       }
     }
   }

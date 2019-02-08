@@ -10,6 +10,12 @@ type User @model {
   image: String
 }
 
+type Coach @model {
+  id: ID! @isUnique
+  email: String! @isUnique
+  password: String!
+}
+
 type Pose @model {
   id: ID! @isUnique
   icon: String!

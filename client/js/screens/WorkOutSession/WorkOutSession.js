@@ -30,8 +30,6 @@ class WorkoutSession extends Component {
   }
 
   componentDidMount() {
-    //TODO - Add if statement determining weather to render light or heavy videos
-
     this.props.navigation.getParam("poses").map(pose => {
       this.setState({ videoList: this.state.videoList.push(pose.video) });
     });
@@ -39,6 +37,7 @@ class WorkoutSession extends Component {
 
   render() {
     const { navigation } = this.props;
+    console.log(this.state.loadingPercentage, this.state.videoDuration);
     return (
       <React.Fragment>
         <YouTube

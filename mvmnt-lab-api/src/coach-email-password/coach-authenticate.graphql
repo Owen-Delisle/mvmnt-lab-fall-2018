@@ -1,0 +1,8 @@
+type AuthenticateCoachPayload {
+  id: ID!
+  token: String!
+}
+
+extend type Mutation {
+  authenticateCoach(email: String!, password: String!): AuthenticateCoachPayload
+}

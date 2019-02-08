@@ -22,6 +22,24 @@ class EditProfileForm extends React.Component {
       console.log("Response", response);
     });
   };
+
+  showImagePicker = () => {
+    const options = {
+      title: "Select Photo",
+      storageOptions: {
+        skipBackup: true,
+        path: "images"
+      }
+    };
+
+    ImagePicker.showImagePicker(options, response => {
+      const source = { uri: response.uri };
+      this.setState({
+        imageSource: [...this.state.imageSource, source]
+      });
+    });
+  };
+
   render() {
     const { id, navigation, user } = this.props;
 
@@ -34,7 +52,9 @@ class EditProfileForm extends React.Component {
           />
           <TouchableOpacity
             style={styles.profileEditButton}
-            onPress={this.handleChoosePhoto}
+            onPress={() => {
+              this.handleChoosePhoto();
+            }}
           >
             <Text>EDIT </Text>
           </TouchableOpacity>

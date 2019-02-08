@@ -73,13 +73,18 @@ class MainPageSessionCard extends Component {
           <TouchableOpacity
             onPress={() => {
               videos = [];
-              session.poses.map(pose => {
-                videos.push(pose.video);
-              });
+              if (!this.state.showLight) {
+                session.poses.map(pose => {
+                  videos.push(pose.heavyVideo);
+                });
+              } else {
+                session.poses.map(pose => {
+                  videos.push(pose.video);
+                });
+              }
               navigation.navigate("WorkoutSession", {
                 poses: session.poses,
-                videos: videos,
-                renderHeavyVideos: this.state.showLight
+                videos: videos
               });
             }}
             style={styles.button}

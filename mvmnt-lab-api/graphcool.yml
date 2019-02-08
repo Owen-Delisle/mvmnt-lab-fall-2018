@@ -31,6 +31,18 @@ functions:
     handler:
       code: src/email-password/authenticate.ts
 
+  coach-signup:
+    type: resolver
+    schema: src/coach-email-password/coach-signup.graphql
+    handler:
+      code: src/coach-email-password/coach-signup.ts
+
+  coach-authenticate:
+    type: resolver
+    schema: src/coach-email-password/coach-authenticate.graphql
+    handler:
+      code: src/coach-email-password/coach-authenticate.ts
+
   loggedIn:
     type: resolver
     schema: src/email-password/loggedInUser.graphql
