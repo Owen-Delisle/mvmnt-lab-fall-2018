@@ -5,7 +5,16 @@ import moment from "moment";
 import ProgressBar from "../ProgressBar";
 import { colors } from "../../config/styles";
 
+const thumbnail = {
+  Bear: require("../../assets/images/icons/Bear.png"),
+  Superbug: require("../../assets/images/icons/Superbug.png"),
+  Gargoyle: require("../../assets/images/icons/Gargoyle.png"),
+  Flamingo: require("../../assets/images/icons/Flamingo.png"),
+  StraightJacket: require("../../assets/images/icons/StraightJacket.png")
+};
+
 const DailyReportsCard = ({ data }) => {
+  console.log("data", data);
   return (
     <View style={styles.card} key={data.id}>
       <View style={styles.cardHeading}>
@@ -14,18 +23,15 @@ const DailyReportsCard = ({ data }) => {
         </Text>
       </View>
       <View style={styles.imageContainer}>
-        <View style={styles.image}>
-          <Image source={require("../../assets/images/icons/Bear.png")} />
-          <Text>6 min</Text>
-        </View>
-        <View style={styles.image}>
-          <Image source={require("../../assets/images/icons/Flamingo.png")} />
-          <Text>7 min</Text>
-        </View>
-        <View style={styles.image}>
-          <Image source={require("../../assets/images/icons/Gargoyle.png")} />
-          <Text>7 min</Text>
-        </View>
+        {data.poses.map(pose => {
+          console.log(pose.duration);
+          return (
+            <View style={styles.image}>
+              <Image source={thumbnail[pose.icon]} />
+              <Text>{pose.duration}</Text>
+            </View>
+          );
+        })}
       </View>
       <View style={styles.scoresText}>
         <Text style={styles.smallHeading}>SESSION SCORE</Text>

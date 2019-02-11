@@ -36,6 +36,7 @@ type DailyReport @model {
   date: DateTime!
   painDescription: String!
   notes: String!
+  poses: [Json!]! @migrationValue(value: "[{\"a\":2},{\"a\":3}]")
 }
 
 type Challenge @model {

@@ -9,6 +9,7 @@ export const CreateDailyReport = gql`
     $userId: String!
     $painDescription: String!
     $notes: String!
+    $poses: [Json!]!
   ) {
     createDailyReport(
       date: $date
@@ -18,9 +19,19 @@ export const CreateDailyReport = gql`
       work: $work
       painDescription: $painDescription
       notes: $notes
+      poses: $poses
     ) {
       id
     }
+  }
+`;
+
+export const AddPoseToDailyReportMutation = gql`
+  mutation AddToDailyReportPoses(
+    $dailyReportsDailyReportId: String!
+    $posesPoseId: String!
+  ) {
+    id
   }
 `;
 

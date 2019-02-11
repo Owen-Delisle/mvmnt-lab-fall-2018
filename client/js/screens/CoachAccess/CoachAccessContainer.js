@@ -5,8 +5,8 @@ import CoachContext from "../../context/CoachContext/CoachProvider";
 import CoachAccess from "./CoachAccess";
 
 const LoginMutation = gql`
-  mutation AuthenticateUser($email: String!, $password: String!) {
-    authenticateUser(email: $email, password: $password) {
+  mutation AuthenticateCoach($email: String!, $password: String!) {
+    authenticateCoach(email: $email, password: $password) {
       token
       id
     }

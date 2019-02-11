@@ -6,6 +6,7 @@ import { CreateDailyReport } from "../../apollo";
 import { CreateChallengeMutation } from "../../apollo";
 import { UpdateChallengeMutation } from "../../apollo";
 import { AllChallengesQuery } from "../../apollo";
+import { AddPoseToDailyReportMutation } from "../../apollo";
 
 class DailyReportModalContainer extends Component {
   render() {
@@ -24,6 +25,8 @@ class DailyReportModalContainer extends Component {
                     createChallenge={this.props.createChallenge}
                     userId={id}
                     navigation={this.props.navigation}
+                    poses={this.props.poses}
+                    addPoseToDailyReport={this.props.addPoseToDailyReport}
                   />
                 );
               }}
@@ -47,5 +50,8 @@ export default compose(
   // }),
   graphql(CreateChallengeMutation, {
     name: "createChallenge"
+  }),
+  graphql(AddPoseToDailyReportMutation, {
+    name: "addPoseToDailyReport"
   })
 )(DailyReportModalContainer);

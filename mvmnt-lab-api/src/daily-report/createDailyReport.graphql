@@ -11,5 +11,6 @@ extend type Mutation {
     date: DateTime!
     painDescription: String!
     notes: String!
+    poses: [Json!]!
   ): CreateDailyReportPayload
 }

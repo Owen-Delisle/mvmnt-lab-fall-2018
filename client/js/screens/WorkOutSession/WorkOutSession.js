@@ -89,6 +89,7 @@ class WorkoutSession extends Component {
           <DailyReportModal
             navigation={this.props.navigation}
             workoutCompleted={this.state.workoutCompleted}
+            poses={navigation.getParam("poses")}
           />
         </TouchableOpacity>
       </React.Fragment>

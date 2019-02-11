@@ -13,22 +13,21 @@ const Session = ({ session, loadingPercentage, videoDuration, videoId }) => {
   };
   return (
     <View style={styles.sessionContainer}>
-      {session.video === videoId ||
-        (session.heavyVideo === videoId && (
-          <LinearGradient
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            colors={["#1DC6C2", "#17C687"]}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: `${(loadingPercentage / videoDuration) * 100}%`,
-              height: "100%",
-              backgroundColor: "green"
-            }}
-          />
-        ))}
+      {session.video === videoId || session.heavyVideo === videoId ? (
+        <LinearGradient
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          colors={["#1DC6C2", "#17C687"]}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: `${(loadingPercentage / videoDuration) * 100}%`,
+            height: "100%",
+            backgroundColor: "green"
+          }}
+        />
+      ) : null}
       <View style={styles.session}>
         <Image source={thumbnail[session.icon]} />
       </View>

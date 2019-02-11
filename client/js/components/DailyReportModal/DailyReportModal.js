@@ -79,6 +79,7 @@ class DailyReportModal extends Component {
   }
 
   render() {
+    console.log("POSES", this.props.poses);
     return (
       <View style={styles.centerContainer}>
         <WorkModal
@@ -101,6 +102,8 @@ class DailyReportModal extends Component {
           userId={this.props.userId}
           createChallenge={this.props.createChallenge}
           navigation={this.props.navigation}
+          poses={this.props.poses}
+          addPoseToDailyReport={this.props.addPoseToDailyReport}
         />
 
         <TouchableOpacity

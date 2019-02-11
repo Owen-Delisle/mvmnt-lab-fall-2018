@@ -17,6 +17,9 @@ class ProfileContainer extends Component {
   constructor(props) {
     super(props);
   }
+
+  dataProfile = {};
+
   static navigationOptions = ({ navigation }) => ({
     title: "PROFILE",
     headerTitleStyle: {
@@ -107,14 +110,34 @@ class ProfileContainer extends Component {
                     );
                   if (error) return <Text>{error}</Text>;
                   if (data) {
+                    this.dataProfile = data;
                     return (
-                      <Profile
-                        navigation={this.props.navigation}
-                        dataProfile={data}
-                        logout={removeUserIdToken}
-                        id={id}
-                        allChallenges={this.props.allChallenges.allChallenges}
-                      />
+                      <Query
+                        query={AllChallengesQuery}
+                        variables={{ userId: id }}
+                        fetchPolicy="network-only"
+                      >
+                        {({ loading, error, data }) => {
+                          if (loading) {
+                            console.log("loading");
+                          }
+                          if (data) {
+                            console.log("DATA", data);
+                            return (
+                              <Profile
+                                navigation={this.props.navigation}
+                                dataProfile={this.dataProfile}
+                                logout={removeUserIdToken}
+                                id={id}
+                                allChallenges={data.allChallenges}
+                              />
+                            );
+                          }
+                          if (error) {
+                            console.log(error);
+                          }
+                        }}
+                      </Query>
                     );
                   }
                 }}
@@ -127,18 +150,7 @@ class ProfileContainer extends Component {
   }
 }
 
-export default compose(
-  graphql(AllChallengesQuery, {
-    name: "allChallenges",
-    options: ({ userId }) => {
-      return {
-        variables: {
-          userId
-        }
-      };
-    }
-  })
-)(ProfileContainer);
+export default ProfileContainer;
 
 ProfileContainer.defaultProps = {
   allChallenges: null

@@ -17,6 +17,7 @@ const DailyReportQuery = gql`
       work
       painDescription
       notes
+      poses
     }
   }
 `;

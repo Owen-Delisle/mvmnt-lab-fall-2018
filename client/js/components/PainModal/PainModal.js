@@ -41,6 +41,16 @@ class PainModal extends Component {
     return days;
   }
 
+  posesStringBuilder(poses) {
+    let posesArr = [];
+    poses.map(pose => {
+      posesArr.push(
+        `{\"icon\":\"${pose.icon}\",\"duration\":\"${pose.duration}\"}`
+      );
+    });
+    return posesArr;
+  }
+
   render() {
     const { pain } = this.state;
     return (
@@ -118,9 +128,11 @@ class PainModal extends Component {
                 multiline={true}
               />
             </View>
+
             <TouchableOpacity
               style={styles.button}
               onPress={() => {
+                // prettier-ignore
                 this.props.createReport({
                   variables: {
                     date: new Date().toISOString(),
@@ -129,7 +141,8 @@ class PainModal extends Component {
                     work: this.props.work,
                     userId: this.props.userId,
                     painDescription: this.state.painDescription,
-                    notes: this.state.notes
+                    notes: this.state.notes,
+                    poses: this.posesStringBuilder(this.props.poses)
                   }
                 });
                 this.props.allChallengeResponse.allChallenges.map(challenge => {

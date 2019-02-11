@@ -28,8 +28,8 @@ const CoachAccess = ({ login, storeSessionToken }) => {
                 try {
                   let response = await login({ variables: values });
                   storeSessionToken(
-                    response.data.authenticateUser.token,
-                    response.data.authenticateUser.id
+                    response.data.authenticateCoach.token,
+                    response.data.authenticateCoach.id
                   );
                 } catch (error) {
                   alert.alert(
